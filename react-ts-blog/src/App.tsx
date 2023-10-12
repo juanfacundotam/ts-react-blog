@@ -29,8 +29,8 @@ const INITIAL_STATE = [
 ];
 
 function App() {
-  const [subs, setSubs] = useState<AppState["subs"]>([]);  //<Sub[]>
-  const [newSubsNumber, setNewSubsNumber] = useState<AppState["newSubsNumber"]>();  //<Sub[]>
+  const [subs, setSubs] = useState<AppState["subs"]>([]);  //<Array<Sub>>  ||  <Sub[]>
+  const [newSubsNumber, setNewSubsNumber] = useState<AppState["newSubsNumber"]>(0);  // podriamos poner solo number y listo, pero bueno, asi es más técnico
 
 
 
@@ -40,7 +40,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Nuestros subs</h1>
+      <h1>Blog Subs</h1>
       <ul>
         {subs.map((sub, index) => {
           return (
