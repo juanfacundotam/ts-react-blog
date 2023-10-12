@@ -9,6 +9,11 @@ interface Sub {
   description?: string,
 }
 
+interface AppState {
+  subs: Array<Sub>,
+  newSubsNumber: number;
+}
+
 const INITIAL_STATE = [
   {
     nick: "JosePerez",
@@ -24,7 +29,10 @@ const INITIAL_STATE = [
 ];
 
 function App() {
-  const [subs, setSubs] = useState<Array<Sub>>([]);  //<Sub[]>
+  const [subs, setSubs] = useState<AppState["subs"]>([]);  //<Sub[]>
+  const [newSubsNumber, setNewSubsNumber] = useState<AppState["newSubsNumber"]>();  //<Sub[]>
+
+
 
   useEffect(()=>{
     setSubs(INITIAL_STATE)
