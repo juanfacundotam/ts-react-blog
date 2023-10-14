@@ -1,3 +1,5 @@
+import React from "react";
+
 interface Props {
     subs: Array<{
         nick: string,
@@ -7,6 +9,8 @@ interface Props {
       }>
 }
 
+// export default function List({subs}: Props) {
+// const List: React.FunctionComponent<Props> = ({subs}) => { //esto permite usar children, pero no tendria sentido, por eso gusta mas la forma anterior
 const List = ({subs}: Props) => {
   return (
     <ul>
