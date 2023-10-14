@@ -1,6 +1,12 @@
 import React from "react";
 
 interface Props {
+    // de esta manera podriamos hacerlo y lo bueno que ya lo controlamos nosotros.
+    // children: string 
+    // children: JSX.Element;
+    // children: React.ReactNode
+    // children: (name:string) => React.ReactNode
+
     subs: Array<{
         nick: string,
         avatar: string,
