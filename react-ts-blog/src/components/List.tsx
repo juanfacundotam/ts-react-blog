@@ -1,18 +1,19 @@
 import React from "react";
-
+import {Sub} from "../types"
 interface Props {
-  // de esta manera podriamos hacerlo y lo bueno que ya lo controlamos nosotros.
-  // children: string
-  // children: JSX.Element;
-  // children: React.ReactNode
-  // children: (name:string) => React.ReactNode
+//   de esta manera podriamos hacerlo y lo bueno que ya lo controlamos nosotros.
+//   children: string
+//   children: JSX.Element;
+//   children: React.ReactNode
+//   children: (name:string) => React.ReactNode
 
-  subs: Array<{
-    nick: string;
-    avatar: string;
-    subMonths: number;
-    description?: string;
-  }>;
+//   subs: Array<{
+//     nick: string;
+//     avatar: string;
+//     subMonths: number;
+//     description?: string;
+//   }>;
+  subs: Array<Sub>;
 }
 
 // export default function List({subs}: Props) {
