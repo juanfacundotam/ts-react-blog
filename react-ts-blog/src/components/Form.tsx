@@ -1,13 +1,22 @@
+import { useState } from "react";
+
+interface FormState {
+    nick: string,
+    subMonths: number,
+    avatar: string,
+    description: string,
+}
+
 const Form = () => {
-  const [inputValues, setInputValues] = {
+  const [inputValues, setInputValues] = useState<FormState>({
     nick: "",
     subMonths: 0,
     avatar: "",
     description: "",
-  };
+  });
   const handleSubmit = () => {};
 
-  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setInputValues({
       ...inputValues,
       [evt.target.name]: evt.target.value,
@@ -40,10 +49,9 @@ const Form = () => {
           name="avatar"
           placeholder="avatar"
         />
-        <input
+        <textarea
           onChange={handleChange}
           value={inputValues.description}
-          type="text"
           name="description"
           placeholder="description"
         />
