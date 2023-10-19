@@ -34,7 +34,10 @@ function App() {
   const [subs, setSubs] = useState<AppState["subs"]>([]);  //<Array<Sub>>  ||  <Sub[]>
   const [newSubsNumber, setNewSubsNumber] = useState<AppState["newSubsNumber"]>(0);  // podriamos poner solo number y listo, pero bueno, asi es más técnico
 
+  const handleNewSub = (newSub: Sub): void => {
+    setSubs(subs => [...subs, newSub])
 
+  }
 
   useEffect(()=>{
     setSubs(INITIAL_STATE)
@@ -44,7 +47,8 @@ function App() {
     <div className="App">
       <h1>Blog Subs</h1>
       <List subs={subs}/>
-      <Form/>
+      {/* <Form onNewSub={setSubs}/> //pero no conviene pasar el estado */}
+      <Form onNewSub={handleNewSub}/> 
     </div>
   );
 }
