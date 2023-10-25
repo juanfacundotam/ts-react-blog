@@ -16,19 +16,19 @@ interface AppState {
   newSubsNumber: number;
 }
 
-const INITIAL_STATE = [
-  {
-    nick: "JosePerez",
-    subMonths: 3,
-    avatar: "https://i.pravatar.cc/150?u=JosePerez",
-    description: "Usuario con beneficios",
-  },
-  {
-    nick: "TomasGutierrez",
-    subMonths: 5,
-    avatar: "https://i.pravatar.cc/150?u=TomasGutierrez",
-  },
-];
+// const INITIAL_STATE = [
+//   {
+//     nick: "JosePerez",
+//     subMonths: 3,
+//     avatar: "https://i.pravatar.cc/150?u=JosePerez",
+//     description: "Usuario con beneficios",
+//   },
+//   {
+//     nick: "TomasGutierrez",
+//     subMonths: 5,
+//     avatar: "https://i.pravatar.cc/150?u=TomasGutierrez",
+//   },
+// ];
 
 function App() {
   const [subs, setSubs] = useState<AppState["subs"]>([]);  //<Array<Sub>>  ||  <Sub[]>
@@ -40,7 +40,7 @@ const divRef = useRef<HTMLDivElement>(null); //importante ponerle un valor inici
   }
 
   useEffect(()=>{
-    setSubs(INITIAL_STATE)
+    // setSubs(INITIAL_STATE)
   }, []);
 
   return (
