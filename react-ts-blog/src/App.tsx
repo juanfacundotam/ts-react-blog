@@ -2,7 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
 import List from "./components/List";
 import Form from "./components/Form";
-import {Sub} from "./types"
+import { Sub } from "./types";
+import { SubsResponseFromApi } from "./types";
+import axios from "axios";
 
 // interface Sub {
 //   nick: string,
@@ -12,7 +14,7 @@ import {Sub} from "./types"
 // }
 
 interface AppState {
-  subs: Array<Sub>,
+  subs: Array<Sub>;
   newSubsNumber: number;
 }
 
@@ -31,24 +33,37 @@ interface AppState {
 // ];
 
 function App() {
-  const [subs, setSubs] = useState<AppState["subs"]>([]);  //<Array<Sub>>  ||  <Sub[]>
-  const [newSubsNumber, setNewSubsNumber] = useState<AppState["newSubsNumber"]>(0);  // podriamos poner solo number y listo, pero bueno, asi es más técnico
-const divRef = useRef<HTMLDivElement>(null); //importante ponerle un valor inicial, sino se queja 
+  const [subs, setSubs] = useState<AppState["subs"]>([]); //<Array<Sub>>  ||  <Sub[]>
+  const [newSubsNumber, setNewSubsNumber] =
+    useState<AppState["newSubsNumber"]>(0); // podriamos poner solo number y listo, pero bueno, asi es más técnico
+  const divRef = useRef<HTMLDivElement>(null); //importante ponerle un valor inicial, sino se queja
+
   const handleNewSub = (newSub: Sub): void => {
-    setSubs(subs => [...subs, newSub])
+    setSubs((subs) => [...subs, newSub]);
+    setNewSubsNumber((n) => n + 1);
+  };
 
-  }
-
-  useEffect(()=>{
+  useEffect(() => {
     // setSubs(INITIAL_STATE)
+    // fetch("http://localhost:3001/subs").then(
+    //   res => res.json()
+    // ).then(subs => {
+    //   console.log(subs)
+    //   setSubs(subs)
+    // });
+    const fetchSubs = (): Promise<SubsResponseFromApi> => {
+      return axios.get("http://localhost:3001/subs").then(res => res.data);
+    };
+    fetchSubs()
   }, []);
 
   return (
     <div className="App" ref={divRef}>
       <h1>Blog Subs</h1>
-      <List subs={subs}/>
+      <List subs={subs} />
+      New subs: {newSubsNumber}
       {/* <Form onNewSub={setSubs}/> //pero no conviene pasar el estado */}
-      <Form onNewSub={handleNewSub}/> 
+      <Form onNewSub={handleNewSub} />
     </div>
   );
 }
