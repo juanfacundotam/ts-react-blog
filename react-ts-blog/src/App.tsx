@@ -52,9 +52,27 @@ function App() {
     //   setSubs(subs)
     // });
     const fetchSubs = (): Promise<SubsResponseFromApi> => {
-      return axios.get("http://localhost:3001/subs").then(res => res.data);
+      return axios.get("http://localhost:3001/subs").then((res) => res.data);
     };
-    fetchSubs()
+
+    const mapFromApiToSubs = (apiResponse: SubsResponseFromApi): Array<Sub> => {
+      return apiResponse.map((subFromApi) => {
+        const {
+          months: subMonths,
+          profileUrl: avatar,
+          nick,
+          description,
+        } = subFromApi;
+
+        return {
+          nick,
+          description,
+          avatar,
+          subMonths,
+        };
+      });
+    };
+    fetchSubs().then(mapFromApiToSubs).then(setSubs);
   }, []);
 
   return (
