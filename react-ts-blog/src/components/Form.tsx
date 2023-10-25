@@ -29,13 +29,14 @@ type FormReducerAction = {
 
 const formReducer = (state: FormState["inputValues"], action: FormReducerAction) => {
   switch(action.type) {
+    
     case "change_value":
       const {inputName, inputValue} = action.payload;
       return {
         ...state,
         [inputName]: inputValue
       }
-      case "clear":
+    case "clear":
         return INITIAL_STATE
   }
 }
@@ -51,20 +52,27 @@ const Form = ({onNewSub}: FormProps) => {
     handleClear();
   };
 
+  // const handleChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  //   setInputValues({
+  //     ...inputValues,
+  //     [evt.target.name]: evt.target.value,
+  //   });
+  // };
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setInputValues({
-      ...inputValues,
-      [evt.target.name]: evt.target.value,
-    });
+   const {name, value} = evt.target;
+   dispatch({
+    type: "change_value",
+    payload: {
+      inputName: name,
+      inputValue: value,
+    }
+   })
   };
 
   const handleClear = () => {
-    setInputValues({
-      nick: "",
-      subMonths: 0,
-      avatar: "",
-      description: "",
-    });
+    dispatch({
+      type: "clear"
+    })
   };
   return (
     <div>
