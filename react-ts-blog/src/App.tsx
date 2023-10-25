@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
 import List from "./components/List";
 import Form from "./components/Form";
@@ -33,7 +33,7 @@ const INITIAL_STATE = [
 function App() {
   const [subs, setSubs] = useState<AppState["subs"]>([]);  //<Array<Sub>>  ||  <Sub[]>
   const [newSubsNumber, setNewSubsNumber] = useState<AppState["newSubsNumber"]>(0);  // podriamos poner solo number y listo, pero bueno, asi es más técnico
-
+const divRef = useRef(); 
   const handleNewSub = (newSub: Sub): void => {
     setSubs(subs => [...subs, newSub])
 
