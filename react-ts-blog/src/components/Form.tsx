@@ -1,47 +1,50 @@
 import { useReducer, useState } from "react";
-import {Sub} from "../types"
+import { Sub } from "../types";
 interface FormState {
-    inputValues: Sub,
-
+  inputValues: Sub;
 }
 interface FormProps {
-    onNewSub: (newSub: Sub) => void
+  onNewSub: (newSub: Sub) => void;
 }
 
 //hagamos un reducer
 const INITIAL_STATE = {
   nick: "",
-    subMonths: 0,
-    avatar: "",
-    description: "",
-}
+  subMonths: 0,
+  avatar: "",
+  description: "",
+};
 
-type FormReducerAction = {
-  type: "change_value",
-  payload: {
-    inputName: string,
-    inputValue: string,
-  } | {
-    type: "clear",
-  }
+type FormReducerAction =
+  | {
+      type: "change_value";
+      payload: {
+        inputName: string;
+        inputValue: string;
+      };
+    }
+  | { type: "clear" };
 
-}
-
-const formReducer = (state: FormState["inputValues"], action: FormReducerAction) => {
-  switch(action.type) {
-    
+const formReducer = (
+  state: FormState["inputValues"],
+  action: FormReducerAction
+) => {
+  switch (action.type) {
     case "change_value":
-      const {inputName, inputValue} = action.payload;
+      const { inputName, inputValue } = action.payload;
       return {
         ...state,
-        [inputName]: inputValue
-      }
-    case "clear":
-        return INITIAL_STATE
-  }
-}
+        [inputName]: inputValue,
+      };
 
-const Form = ({onNewSub}: FormProps) => {
+    case "clear":
+      return INITIAL_STATE;
+    default:
+      return state;
+  }
+};
+
+const Form = ({ onNewSub }: FormProps) => {
   // const [inputValues, setInputValues] = useState<FormState['inputValues']>(INITIAL_STATE);
 
   const [inputValues, dispatch] = useReducer(formReducer, INITIAL_STATE);
@@ -49,7 +52,9 @@ const Form = ({onNewSub}: FormProps) => {
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     onNewSub(inputValues);
-    handleClear();
+    dispatch({
+      type: "clear",
+    });
   };
 
   // const handleChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -58,26 +63,27 @@ const Form = ({onNewSub}: FormProps) => {
   //     [evt.target.name]: evt.target.value,
   //   });
   // };
-  const handleChange = (evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-   const {name, value} = evt.target;
-   dispatch({
-    type: "change_value",
-    payload: {
-      inputName: name,
-      inputValue: value,
-    }
-   })
+  const handleChange = (
+    evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = evt.target;
+    dispatch({
+      type: "change_value",
+      payload: {
+        inputName: name,
+        inputValue: value,
+      },
+    });
   };
 
   const handleClear = () => {
     dispatch({
-      type: "clear"
-    })
+      type: "clear",
+    });
   };
   return (
     <div>
-      <form onSubmit={handleSubmit}
-      >
+      <form onSubmit={handleSubmit}>
         <input
           onChange={handleChange}
           value={inputValues.nick}
@@ -105,7 +111,9 @@ const Form = ({onNewSub}: FormProps) => {
           name="description"
           placeholder="description"
         />
-        <button onClick={handleClear} type="button">Clear!</button>
+        <button onClick={handleClear} type="button">
+          Clear!
+        </button>
         <button type="submit">Save new sub!</button>
       </form>
     </div>
