@@ -51,6 +51,7 @@ function App() {
     //   console.log(subs)
     //   setSubs(subs)
     // });
+    
     const fetchSubs = (): Promise<SubsResponseFromApi> => {
       return axios.get("http://localhost:3001/subs").then((res) => res.data);
     };
