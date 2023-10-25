@@ -33,7 +33,7 @@ const INITIAL_STATE = [
 function App() {
   const [subs, setSubs] = useState<AppState["subs"]>([]);  //<Array<Sub>>  ||  <Sub[]>
   const [newSubsNumber, setNewSubsNumber] = useState<AppState["newSubsNumber"]>(0);  // podriamos poner solo number y listo, pero bueno, asi es más técnico
-const divRef = useRef(); 
+const divRef = useRef<HTMLDivElement>(null); //importante ponerle un valor inicial, sino se queja 
   const handleNewSub = (newSub: Sub): void => {
     setSubs(subs => [...subs, newSub])
 
@@ -44,7 +44,7 @@ const divRef = useRef();
   }, []);
 
   return (
-    <div className="App">
+    <div className="App" ref={divRef}>
       <h1>Blog Subs</h1>
       <List subs={subs}/>
       {/* <Form onNewSub={setSubs}/> //pero no conviene pasar el estado */}
