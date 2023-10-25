@@ -18,19 +18,19 @@ interface AppState {
   newSubsNumber: number;
 }
 
-// const INITIAL_STATE = [
-//   {
-//     nick: "JosePerez",
-//     subMonths: 3,
-//     avatar: "https://i.pravatar.cc/150?u=JosePerez",
-//     description: "Usuario con beneficios",
-//   },
-//   {
-//     nick: "TomasGutierrez",
-//     subMonths: 5,
-//     avatar: "https://i.pravatar.cc/150?u=TomasGutierrez",
-//   },
-// ];
+const INITIAL_STATE = [
+  {
+    nick: "JosePerez",
+    subMonths: 3,
+    avatar: "https://i.pravatar.cc/150?u=JosePerez",
+    description: "Usuario con beneficios",
+  },
+  {
+    nick: "TomasGutierrez",
+    subMonths: 5,
+    avatar: "https://i.pravatar.cc/150?u=TomasGutierrez",
+  },
+];
 
 function App() {
   const [subs, setSubs] = useState<AppState["subs"]>([]); //<Array<Sub>>  ||  <Sub[]>
@@ -44,36 +44,36 @@ function App() {
   };
 
   useEffect(() => {
-    // setSubs(INITIAL_STATE)
+    setSubs(INITIAL_STATE)
     // fetch("http://localhost:3001/subs").then(
     //   res => res.json()
     // ).then(subs => {
     //   console.log(subs)
     //   setSubs(subs)
     // });
-    
-    const fetchSubs = (): Promise<SubsResponseFromApi> => {
-      return axios.get("http://localhost:3001/subs").then((res) => res.data);
-    };
 
-    const mapFromApiToSubs = (apiResponse: SubsResponseFromApi): Array<Sub> => {
-      return apiResponse.map((subFromApi) => {
-        const {
-          months: subMonths,
-          profileUrl: avatar,
-          nick,
-          description,
-        } = subFromApi;
+    // const fetchSubs = (): Promise<SubsResponseFromApi> => {
+    //   return axios.get("http://localhost:3001/subs").then((res) => res.data);
+    // };
 
-        return {
-          nick,
-          description,
-          avatar,
-          subMonths,
-        };
-      });
-    };
-    fetchSubs().then(mapFromApiToSubs).then(setSubs);
+    // const mapFromApiToSubs = (apiResponse: SubsResponseFromApi): Array<Sub> => {
+    //   return apiResponse.map((subFromApi) => {
+    //     const {
+    //       months: subMonths,
+    //       profileUrl: avatar,
+    //       nick,
+    //       description,
+    //     } = subFromApi;
+
+    //     return {
+    //       nick,
+    //       description,
+    //       avatar,
+    //       subMonths,
+    //     };
+    //   });
+    // };
+    // fetchSubs().then(mapFromApiToSubs).then(setSubs);
   }, []);
 
   return (
